@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 @RequiredArgsConstructor
 public class UrlShortenerService {
-    private final Map<String, String> URLMap = new ConcurrentHashMap<>();
+    private final  Map<String, String> URLMap = new ConcurrentHashMap<>();
     private final RandomStringGenerator randomGenerator;
     private final ShortenerProperties properties;
 
@@ -33,9 +33,14 @@ public class UrlShortenerService {
         String shortURL;
         while (true) {
             shortURL = randomGenerator.generate();
+
             if (!URLMap.containsKey(shortURL)) {
-                URLMap.put(shortURL, originalURLModel.getOriginalURL());
-                break;
+                synchronized (UrlShortenerService.class) {
+                    if (!URLMap.containsKey(shortURL)) {
+                        URLMap.put(shortURL, originalURLModel.getOriginalURL());
+                        break;
+                    }
+                }
             }
         }
         return URLShortModel.builder()

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class URLOriginalModel {
-    @Schema(name = "Original URL",
+    @Schema(title = "Original URL",
             example = "https://www.google.com/search?q=rajnikant&rlz=1C5CHFA_enIN961IN961",
             required = true)
     private String originalURL;

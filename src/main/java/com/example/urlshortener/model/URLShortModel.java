@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class URLShortModel {
-    @Schema(name = "Short URL", example = "http://short.est/BTQyg", required = true)
+    @Schema(title = "Short URL", example = "http://short.est/BTQyg", required = true)
     private String shortURL;
 }
