@@ -1,0 +1,17 @@
+# general
+spring:
+  application:
+    name: url-shortener
+server:
+  port: 8080
+  error:
+    include-exception: true
+    include-stacktrace: always
+# logging
+# OFF << FATAL << ERROR << WARN << INFO << DEBUG << TRACE << ALL
+logging:
+  level.com.example.demo: "DEBUG"
+shortener:
+  shortUrlPrefix: "http://short.est/"
+  generatedStringLength: 5
+  alphabetLetters: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
