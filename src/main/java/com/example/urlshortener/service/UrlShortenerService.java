@@ -1,9 +1,9 @@
 package com.example.urlshortener.service;
 
 import com.example.urlshortener.config.ShortenerProperties;
-import com.example.urlshortener.model.exception.NoSuchURLFoundException;
 import com.example.urlshortener.model.URLOriginalModel;
 import com.example.urlshortener.model.URLShortModel;
+import com.example.urlshortener.model.exception.NoSuchURLFoundException;
 import com.example.urlshortener.util.RandomStringGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 @RequiredArgsConstructor
 public class UrlShortenerService {
-    private final Map<String, String>URLMap = new ConcurrentHashMap<>();
+    private final Map<String, String> URLMap = new ConcurrentHashMap<>();
     private final RandomStringGenerator randomGenerator;
     private final ShortenerProperties properties;
+
     public URLOriginalModel getOriginalURL(String shortURL) {
-        String shortURLKey =  shortURL.substring(properties.getShortUrlPrefix().length());
+        String shortURLKey = shortURL.substring(properties.getShortUrlPrefix().length());
         String originalURLstring = URLMap.get(shortURLKey);
         if (originalURLstring == null) {
             throw new NoSuchURLFoundException(shortURL);
