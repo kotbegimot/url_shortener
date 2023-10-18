@@ -2,7 +2,6 @@ package com.example.urlshortener.controller;
 
 import com.example.urlshortener.model.URLOriginalModel;
 import com.example.urlshortener.model.URLShortModel;
-import com.example.urlshortener.model.exception.NoSuchURLFoundException;
 import com.example.urlshortener.service.UrlShortenerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,7 +9,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -63,15 +61,4 @@ public class UrlShortenerController {
      return shortenerService.getOriginalURL(shortUrl);
      }
      */
-
-    /**
-     * Custom exception, returns 404 if the requested URL does not exist.
-     */
-    @ExceptionHandler(NoSuchURLFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleNoSuchURLFoundException(NoSuchURLFoundException exception) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(exception.getMessage());
-    }
 }

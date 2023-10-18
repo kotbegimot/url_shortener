@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Get original URL by short URL</title>
+</head>
+<body>
+    <form th:action="@{/processForm}" method="GET">
+        <input type="text" name="shortURL" placeholder="Enter short URL"/>
+        <input type="submit"/>
+    </form>
+</body>
+</html>
