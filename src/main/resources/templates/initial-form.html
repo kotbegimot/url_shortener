@@ -5,8 +5,8 @@
     <title>Get original URL by short URL</title>
 </head>
 <body>
-    <form th:action="@{/processForm}" method="GET">
-        <input type="text" name="shortURL" placeholder="Enter short URL"/>
+    <form th:action="@{/processForm}" th:object="${shortUrlModel}" method="GET">
+        <input type="text" th:field="*{shortURL}" placeholder="Enter short URL"/>
         <input type="submit"/>
     </form>
 </body>
