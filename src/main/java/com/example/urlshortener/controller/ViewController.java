@@ -3,9 +3,11 @@ package com.example.urlshortener.controller;
 import com.example.urlshortener.model.URLOriginalModel;
 import com.example.urlshortener.model.URLShortModel;
 import com.example.urlshortener.service.UrlShortenerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -21,9 +23,14 @@ public class ViewController {
     }
 
     @GetMapping("/processForm")
-    public String processForm(@ModelAttribute("shortUrlModel") URLShortModel shortUrlModel,
+    public String processForm(@Valid @ModelAttribute("shortUrlModel") URLShortModel shortUrlModel,
+                              BindingResult theBindingResult,
                               @ModelAttribute("originalUrlModel") URLOriginalModel originalUrlModel) {
-        originalUrlModel.setOriginalURL(shortenerService.getOriginalURL(shortUrlModel.getShortURL()).getOriginalURL());
-        return "showOriginalURL";
+        if (theBindingResult.hasErrors()) {
+            return "initial-form";
+        } else {
+            originalUrlModel.setOriginalURL(shortenerService.getOriginalURL(shortUrlModel.getShortURL()).getOriginalURL());
+            return "showOriginalURL";
+        }
     }
 }

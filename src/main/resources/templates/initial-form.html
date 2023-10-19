@@ -1,13 +1,25 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Get original URL by short URL</title>
+    <!-- reference CSS file -->
+    <link rel="stylesheet"
+          th:href="@{css/error.css}" />
 </head>
 <body>
     <form th:action="@{/processForm}" th:object="${shortUrlModel}" method="GET">
-        <input type="text" th:field="*{shortURL}" placeholder="Enter short URL"/>
-        <input type="submit"/>
+        Short URL (*): <input type="text" th:field="*{shortURL}" placeholder="Enter short URL"/>
+
+        <!-- Show error message (if present) -->
+        <span th:if="${#fields.hasErrors('shortURL')}"
+              th:errors="*{shortURL}"
+              class="error">
+        </span>
+
+        <br><br>
+
+        <input type="submit" value="Submit"/>
     </form>
 </body>
 </html>
